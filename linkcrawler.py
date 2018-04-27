@@ -87,7 +87,7 @@ def same_domain(url1, url2):
 考虑深度
 考虑超链接循环嵌套
 '''
-def link_crawler(seed_url, link_regex=None, delay=5, max_depth=-1, max_urls=-1, headers=None, user_agent='wswp', proxy=None, num_retries=1):
+def link_crawler(seed_url, link_regex=None, delay=1, max_depth=-1, max_urls=-1, headers=None, user_agent='wswp', proxy=None, num_retries=1, scrape_callback=None):
 	crawl_queue = queue.deque([seed_url])
 	seen = {seed_url:0}
 	num_urls = 0
@@ -102,6 +102,8 @@ def link_crawler(seed_url, link_regex=None, delay=5, max_depth=-1, max_urls=-1, 
 			throttle.wait(url)
 			html = download(url, headers, proxy, num_retries)
 			links = []
+			if scrape_callback:
+				scrape_callback(url, html)
 			depth = seen[url]
 			if depth != max_depth:
 				if link_regex:
