@@ -39,4 +39,5 @@ class Download(object):
 	def download(self, url, headers, proxy, num_retries, data=None):
 		return {'html':html, 'code':code}
 	def link_crawler(self, cache=None):
+		crawl_queue = [seed_url]
 		pass
