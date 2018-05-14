@@ -1,6 +1,7 @@
 import re
 import os
 from urllib.parse import urlparse
+from datetime import datetime, timedelta
 dict1 = {'name1':'value1', 'name2':'value2'}
 
 print(dict1.get('name1'))
@@ -31,3 +32,7 @@ print (components.netloc+path+components.query)
 
 path = 'cache/example.webscraping.com/places/default/user/login_next_/places/default/index111'
 print (os.path.dirname(path))
+
+print (datetime.utcnow())
+print (timedelta(days=30))
+print (datetime.utcnow()+timedelta(days=30))

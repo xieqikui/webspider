@@ -6,14 +6,14 @@ from urllib import request
 from urllib.parse import urlparse
 
 filename = 'log_'+ time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime()) + '.log'
-# logging.basicConfig(filename=filename, level=logging.DEBUG)
+logging.basicConfig(filename=filename, level=logging.DEBUG)
 
 def log(msg):
-	# logging.info(msg)
-	pass
+	logging.info(msg)
+	# pass
 
 DEFAULT_AGENT = 'wswp'
-DEFAULT_DELAY = 5
+DEFAULT_DELAY = -1
 DEFAULT_RETRIES = 1
 DEFAULT_TIMEOUT = 60
 
@@ -35,6 +35,7 @@ class Downloader(object):
 				# raise e
 				pass
 			else:
+				# log('url:{}, result:{}'.format(url,result))
 				if self.num_retries > 0 and 500 <= result['code'] < 600:
 					log('server error, so abandon the result and re-download')
 					result = None

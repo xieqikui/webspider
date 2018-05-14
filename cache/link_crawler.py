@@ -20,6 +20,7 @@ def link_crawler(seed_url, link_regex=None, delay=1, max_depth=-1, max_urls=-1, 
 			continue
 		depth = 0
 		html = dwnlder(url)
+		print ('url:{}, seen[url]:{}'.format(url, seen[url]))
 		if url in seen:
 			depth = seen[url]
 		links = []
@@ -28,7 +29,9 @@ def link_crawler(seed_url, link_regex=None, delay=1, max_depth=-1, max_urls=-1, 
 				links.extend(link for link in get_links(html) if re.search(link_regex, link))
 			for link in links:
 				link = normalize(seed_url, link)
-				print ('link:', link)
+				# print ('link:{}, seen[link]:{}'.format(link, seen[link]))
+				# print ('link:{}'.format(link))
+				# print ('seen[link]:{}'.format(seen[link]))
 				if link not in seen:
 					seen[link] = depth + 1
 					if same_domain(seed_url, link):
